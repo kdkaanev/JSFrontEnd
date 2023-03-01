@@ -1,6 +1,6 @@
 function listOfNames(arrNames){
-    arrNames.sort()
-    arrNames.forEach((element, index) => {
-        console.log(`${index + 1}.${element}`)
-    });
+    return[...arrNames]
+    .sort((aName, bName) => aName.localeCompare(bName))
+    .map((name, index) => `${index + 1}.${name}`)
+    .join('\n');
 }
