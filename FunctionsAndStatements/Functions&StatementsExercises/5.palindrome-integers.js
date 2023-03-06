@@ -11,3 +11,13 @@ function palindromeIntegers(integers){
         }
     }
 }
+function palindromeIntegers1(integers){
+    integers.forEach(num => {
+        console.log(isPalindrome(num))
+    });
+    function isPalindrome(num){
+        let reversed = Number([...num.toString()].reverse().join(''))
+        return reversed === num
+    }
+}
+palindromeIntegers1([123,321,111,123456])
