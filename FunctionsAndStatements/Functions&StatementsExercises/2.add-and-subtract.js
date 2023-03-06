@@ -11,5 +11,3 @@ function sum1(n1,n2,n3){
     const subtract1 = (a1, b1) => a1 - b1
     console.log(subtract1(add1(n1, n2), n3))
 }
-sum1(3,5,2)
-sum(3,5,2)
