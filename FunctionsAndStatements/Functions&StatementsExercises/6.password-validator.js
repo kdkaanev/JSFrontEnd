@@ -1,7 +1,7 @@
 function passwordValidator(pass){
     let l =false
     let c = false
-    let least = false
+     let least = false
     length(pass)
     consist(pass)
     leastTwoDigits(pass)

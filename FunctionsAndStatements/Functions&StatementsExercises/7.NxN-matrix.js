@@ -12,5 +12,9 @@ function nXnMatrix(n){
         }
         return column
     }
-    matrix.forEach(v=>console.log(...v));
+    matrix.forEach(v=>console.log(...v))
 }
+function nXnMatrix1(n){
+    new Array(n).fill(new Array(n).fill(n)).forEach(row => console.log(row.join(" ")))
+}
+nXnMatrix1(6)
