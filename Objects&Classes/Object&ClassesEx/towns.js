@@ -1,7 +1,5 @@
 function solve(arr){
-    let towns = {
-
-    }
+    let towns = {}
     for (const line of arr) {
         let townInfo = line.split(' | ')
         let town = townInfo[0]
@@ -13,4 +11,11 @@ function solve(arr){
         console.log(towns)
     }
     
+}
+function solve2(arr){
+    for (const line of arr) {
+       let [town, latitude, longitude] = line.split(' | ')
+       let townObj = {town, latitude: Number(latitude).toFixed(2), longitude: Number(longitude).toFixed(2)}
+
+    }
 }
