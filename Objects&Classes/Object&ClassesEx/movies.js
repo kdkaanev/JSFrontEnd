@@ -1,8 +1,9 @@
 function moviesApp(input){
     let movies = []
     for (const line of input) {
+        let command = line.split(' ')
         if(line.includes('addMovie')){
-            let movieName = line.split(' ').slice(1).join('')
+            let movieName = command.slice(1).join(' ')
             addMovie(movieName)
         }
         else if(line.includes('directedBy')){
@@ -12,12 +13,13 @@ function moviesApp(input){
             directedBy(movieName, directorName)
         }
         else if(line.includes('onDate')){
-            let info = line.split('onDate')
+            let info = line.split(' onDate ')
             let movieName = info[0]
             let date = info[1]
             onDate(movieName, date)
         }
-    }console.log(JSON.stringify(movies))
+        
+    }
 
     function addMovie(name){
         movies.push({name})
@@ -34,15 +36,8 @@ function moviesApp(input){
             movie.date = date
         }
     }
+    let filteredMovie = movies.filter((movie) => movie.hasOwnProperty('name') && movie.hasOwnProperty('director') && movie.hasOwnProperty('date'))
+    for (const movie of filteredMovie) {
+        console.log(JSON.stringify(movie))
+    } 
 }
-moviesApp([
-    'addMovie Fast and Furious',
-    'addMovie Godfather',
-    'Inception directedBy Christopher Nolan',
-    'Godfather directedBy Francis Ford Coppola',
-    'Godfather onDate 29.07.2018',
-    'Fast and Furious onDate 30.07.2018',
-    'Batman onDate 01.08.2018',
-    'Fast and Furious directedBy Rob Cohen'
-    ]
-    )
