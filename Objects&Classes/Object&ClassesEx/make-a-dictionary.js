@@ -1,6 +1,12 @@
-function makeADictionary(...input){
-    let dictionary = JSON.parse(input)
-    console,log(dictionary)
+function makeADictionary(input){
+    let dictionary = {}
+    for (const json of input) {
+        let newDict = JSON.parse(json)
+        
+        console.log(newDict)
+    }
+    
+    
 }
 makeADictionary([
     '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
