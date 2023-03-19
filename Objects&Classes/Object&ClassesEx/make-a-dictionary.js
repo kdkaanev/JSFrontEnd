@@ -2,12 +2,30 @@ function makeADictionary(input){
     let dictionary = {}
     for (const json of input) {
         let newDict = JSON.parse(json)
+        let entries = Object.entries(newDict)
+        for(let [key, value] of entries){
+            if(key in dictionary){
+                dictionary[key] = value
+            }
+            dictionary[key] = value
+        }
         
-        console.log(newDict)
+        
+        
+     
+    }
+    let sortDict = dictionary => Object
+            .keys(dictionary)
+            .sort()
+            .reduce((res, key) => (res[key] = dictionary[key],res), {})
+    for (const key in sortDict) {
+        console.log(`Term: ${key} => Definition: ${sortDict[key]}`)
+            
+        }
     }
     
     
-}
+
 makeADictionary([
     '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
     '{"Bus":"A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare."}',
