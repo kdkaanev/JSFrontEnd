@@ -5,10 +5,13 @@ function solve() {
   textInput.pop()
   while(textInput.length > 0){
     let paragraph = textInput.splice(0, 3)
+    let p = document.createElement('p')
+    p.innerText = paragraph.join('.') + '.'
+    output.appendChild(p)
     
-    console.log(paragraph)
-    console.log(textInput)
-    debugger
+    console.log(output)
+    
+  
   }
   
 }
