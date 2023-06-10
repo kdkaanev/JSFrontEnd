@@ -14,7 +14,7 @@ function makeADictionary(input){
         
      
     }
-    let sortDict = dictionary => Object
+    let sortDict =  Object
             .keys(dictionary)
             .sort()
             .reduce((res, key) => (res[key] = dictionary[key],res), {})
