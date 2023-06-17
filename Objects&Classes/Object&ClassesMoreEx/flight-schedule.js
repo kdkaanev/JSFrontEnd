@@ -6,15 +6,28 @@ function flightShedule(input) {
     console.log(command);
 
     for (const line of destination) {
-        let [number, city] = line.split(' ');
-        flyes[number] = city
+        let [number, ...city] = line.split(' ');
+            flyes[number] = city;
+       
     }
     for (const line of status) {
-        let[num, state] = line.split(' ')
+        let[num, _state] = line.split(' ')
         if (command === 'Cancelled') {
-           let filtredFly = Object.entries(flyes).filter(([key, value]) => key === num );
-           console.log(filtredFly); 
-           
+          let filtredFly = Object.entries(flyes).filter(
+            ([key, _value]) => key === num
+          );
+        
+        }else if (command === 'Ready to fly') {
+            let filtredFly = Object.entries(flyes).filter(
+                ([key, _value]) => key !== num
+              );
+            for (const line of filtredFly) {
+
+                
+                console.log(`{ Destination: ${line[1].join(' ')}, Status: 'Ready to fly' }`);
+            } 
+              
+        
         }
     
     
@@ -36,7 +49,8 @@ flightShedule([['WN269 Delaware',
  ['DL2120 Cancelled',
  'WN612 Cancelled',
  'WN1173 Cancelled',
- 'SK430 Cancelled'],
- ['Cancelled']
+ 'SK330 Cancelled'],
+ ['Ready to fly']
 ]
+
 )
