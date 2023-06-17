@@ -1,15 +1,25 @@
 function flightShedule(input) {
     let flyes = {}
     let destination = input[0];
-    let depart = input[1];
-    let arrive = input[2];
+    let status = input[1];
+    let command = input[2][0];
+    console.log(command);
 
     for (const line of destination) {
         let [number, city] = line.split(' ');
         flyes[number] = city
     }
-    console.log(flyes)
-
+    for (const line of status) {
+        let[num, state] = line.split(' ')
+        if (command === 'Cancelled') {
+           let filtredFly = Object.entries(flyes).filter(([key, value]) => key === num );
+           console.log(filtredFly); 
+           
+        }
+    
+    
+    }
+    console.log(flyes);
 
     
 }
