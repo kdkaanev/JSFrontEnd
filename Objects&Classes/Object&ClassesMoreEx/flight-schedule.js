@@ -3,7 +3,7 @@ function flightShedule(input) {
     let destination = input[0];
     let status = input[1];
     let command = input[2][0];
-    console.log(command);
+    let cancelledFlyes = [];
 
     for (const line of destination) {
         let [number, ...city] = line.split(' ');
@@ -11,31 +11,35 @@ function flightShedule(input) {
        
     }
     for (const line of status) {
-        let[num, _state] = line.split(' ')
-        if (command === 'Cancelled') {
-          let filtredFly = Object.entries(flyes).filter(
-            ([key, _value]) => key === num
-          );
+      let [num, _state] = line.split(" ");
+      const cancelledNum = Object.keys(flyes).filter(
+        (key) => key === num
+      );
         
-        }else if (command === 'Ready to fly') {
-            let filtredFly = Object.entries(flyes).filter(
-                ([key, _value]) => key !== num
-              );
-            for (const line of filtredFly) {
+      cancelledFlyes.unshift(...cancelledNum);
+    }
+    if (command === "Cancelled") {
+      for (const num of cancelledFlyes) {
+        console.log(`{ Destination: '${flyes[num]}', Status: 'Cancelled' }`);
+      }
+    } else if (command === "Ready to fly") {
+      for (const num of Object.keys(flyes)) {
+        if (!cancelledFlyes.includes(num)) {
+          console.log(`{ Destination:'${flyes[num]}', Status: 'Ready to fly' }`);
+        }
+      }
+    }
+  }
+    
+   
 
-                
-                console.log(`{ Destination: ${line[1].join(' ')}, Status: 'Ready to fly' }`);
-            } 
               
         
-        }
-    
-    
-    }
-    console.log(flyes);
+        
+          
 
     
-}
+
 flightShedule([['WN269 Delaware',
 'FL2269 Oregon',
  'WN498 Las Vegas',
@@ -47,10 +51,11 @@ flightShedule([['WN269 Delaware',
  'KL5744 Illinois',
  'WN678 Pennsylvania'],
  ['DL2120 Cancelled',
- 'WN612 Cancelled',
- 'WN1173 Cancelled',
- 'SK330 Cancelled'],
- ['Ready to fly']
+'WN612 Cancelled',
+'WN1173 Cancelled',
+'SK330 Cancelled'],
+['Ready to fly']
 ]
+
 
 )
