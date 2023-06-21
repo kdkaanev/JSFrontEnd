@@ -1,17 +1,30 @@
 function schoolRegister(input){
     let students = [];
-    let student = {}
-    for(let line of input){ 
-        let info = line.split(', ');
-        for (const line of info) {
-           let[_,value] = line.split(': ');
-            
-            
+    let student = {};
+    for(let line of input){
+      let info = line.split(", ");
+      students.push(info);
+    }
+    console.log(students)
+    students.forEach(element => {
+        let name = element[0].split(": ")[1];
+        let gradeStr = element[1].split(": ")[1];
+        let grade = Number(gradeStr);
+        let averageScoreStr = element[2].split(": ")[1];
+        let averageScore = Number(averageScoreStr);
+        student = {
+            name: name,
+            grade: grade,    
+            averageScore: averageScore
         }
+        console.log(student)
+    
+    })
         
         
 }
-}
+
+
 
 
 schoolRegister(
