@@ -2,9 +2,11 @@ function schoolRegister(input){
   let students = [];
   let student = {};
   let newYear = [];
+  let result = {}
   for (let line of input) {
     let info = line.split(", ");
     students.push(info);
+    
   }
   students.forEach((element) => {
     let name = element[0].split(": ")[1];
@@ -12,31 +14,53 @@ function schoolRegister(input){
     let grade = Number(gradeStr);
     let averageScoreStr = element[2].split(": ")[1];
     let averageScore = Number(averageScoreStr);
-    if (averageScore < 3) {
+    if (averageScore >= 3) {
       student = {
         name: name,
-        grade: grade,
+        grade: grade + 1,
         averageScore: averageScore,
       };
-    } else {
-      student = {
-        name: name,
-        grade: grade++,
-        averageScore: averageScore,
-      };
+      newYear.push(student);
     }
-    newYear.push(student);
+    
   });
   newYear.sort((a, b) => a.grade - b.grade);
   newYear.forEach((element) => {
-    console.log(
-      `${element.name} is graduated with ${element.averageScore}`
-    );
-  
+    if (!result[element.grade]) {
+      result[element.grade] = [];
+      result[element.grade].push(element.name,element.averageScore);
+      
+    }else{
+      result[element.grade].push(element.name,element.averageScore);
     }
+    
+    }
+    
   )
+  let listOfStudens = []
+  let annualScore = 0
+  for (const key in result) {
+    console.log(`${key} Grade`);
+    result[key].forEach((element,index) => {
+      if (index % 2 === 0) {
+        listOfStudens.push(element)
+      }else{
+        annualScore = annualScore + element
+      }
+      
+    }
+    )
+    annualScore = annualScore / result[key].length * 2
+    console.log(`List of students: ${listOfStudens.join(', ')}`);
+    console.log(`Average annual grade from last year: ${annualScore.toFixed(2)}`);
+    
+  
+  }
+
+
 }
 
+  
 
 
 schoolRegister(
