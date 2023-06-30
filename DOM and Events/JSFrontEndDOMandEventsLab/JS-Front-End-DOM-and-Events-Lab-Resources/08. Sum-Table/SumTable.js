@@ -1,10 +1,6 @@
 function sumTable() {
     let sum = 0
-    const input = Array.from(document.querySelectorAll('td:nth-child(even)'))
-    input.pop()
-    let costs = input
-    for (const cost of costs.values()) {
-        sum += Number(cost)
-    }
-    console.log(sum)
+    const input = Array.from(document.querySelectorAll('body > table > tbody > tr > td:nth-child(2)'))
+    console.log(input)
+    
 }
