@@ -11,11 +11,10 @@ function solve() {
             fetch(`${BASE_URL}${id}`)
                 .then((res) => res.json())
                 .then((data) => {
-                    info.textContent = data.name
+                    info.textContent = `Next stop ${data.name}`
                     id = data.next
                     departBtn.setAttribute('disabled',true)
                     arriveBtn.removeAttribute('disabled')
-                    console.log(data)
                 })
                 .catch((err) => {
                     info.textContent = 'Error'
@@ -27,9 +26,9 @@ function solve() {
     }
 
     async function arrive() {
-        const response = await fetch(`${BASE_URL}{id}`)
+        const response = await fetch(`${BASE_URL}${id}`)
         const dataArrive = await response.json()
-        console.log(dataArrive)
+        info.textContent = `Arriving at ${dataArrive.name}` 
         arriveBtn.setAttribute('disabled',true)
         departBtn.removeAttribute('disabled')
 
