@@ -11,50 +11,100 @@ function attachEvents() {
     const submitBtn = document.getElementById('submit')
     const BASE_URL = 'http://localhost:3030/jsonstore/forecaster/'
     let id = ''
-    let alowedLocations = []
+   
     
     fetch(`${BASE_URL}/locations`)
         .then((res) => res.json())
         .then((data) =>{
             submitBtn.addEventListener('click', bthHandler)
+            
             function bthHandler(){
                 const enterLocation = document.getElementById('location').value
                 const forecastDiv = document.getElementById('forecast')
+
                 forecastDiv.style.display = 'block'
                 let divCurrent = document.getElementById('current')
+                const divUpcoming = document.getElementById('upcoming')
+                divUpcoming.style.display = 'block'
+                if(divCurrent.hasChildNodes()){
+                   divCurrent.innerHTML = ''
+                }
                 data.forEach(element => {
                     if(element.name === enterLocation){
                         id = element.code
                     }
 
                 });
-                fetch(`${BASE_URL}/today/${id}`)
-                    .then((response) => response.json())
-                    .then((todayForecast) =>{
-                        console.log(todayForecast)
-                       let divForecasts = document.createElement('div')
-                       divForecasts.classList.add('forecasts')
-                        divCurrent.appendChild(divForecasts)
-                        let spanSimbol = document.createElement('span')
-                        spanSimbol.classList.add('condition', 'symbol')
-                        divCurrent.appendChild(spanSimbol)
-                        for (const key in todayForecast) {
-                            console.log(key)
-                        }
-                        
-                        
-
-                    })
-                    
                 
-               
+                fetch(`${BASE_URL}/today/${id}`)
+                  .then((response) => response.json())
+                  .then((todayForecast) => {
+                  
+                    let divForecasts = document.createElement("div");
+                   
+                    divForecasts.classList.add("forecasts");
+                   
+                    divCurrent.appendChild(divForecasts);
+                    let spanSimbol = document.createElement("span");
+                    spanSimbol.classList.add("condition", "symbol");
+                    divForecasts.appendChild(spanSimbol);
+                    spanSimbol.innerHTML =
+                      weaterSimbol[todayForecast.forecast.condition];
+
+                    let spanCondition = document.createElement("span");
+                    spanCondition.classList.add("condition");
+                    divForecasts.appendChild(spanCondition);
+                    let spanCity = document.createElement("span");
+                    spanCity.classList.add("forecast-data");
+                    spanCity.innerHTML = todayForecast.name;
+                    spanCondition.appendChild(spanCity);
+                    let spanDegrees = document.createElement("span");
+                    spanDegrees.classList.add("forecast-data");
+                    spanDegrees.innerHTML = `${todayForecast.forecast.low}${weaterSimbol.Degrees}/${todayForecast.forecast.high}${weaterSimbol.Degrees}`;
+                    spanCondition.appendChild(spanDegrees);
+                    
+                  })
+                  .catch((err) =>{
+                    forecastDiv.style.display = 'block'
+                    forecastDiv.innerHTML = 'Error'
+                });
+                  
+                  fetch(`${BASE_URL}/upcoming/${id}`)
+                  .then((response) => response.json())
+                  .then((upcomingForecast) => {
+                    let divForecastsInfo = document.createElement("div");
+                    divForecastsInfo.classList.add("forecast-info");
+                    divUpcoming.appendChild(divForecastsInfo);
+                    let spanUpcoming = document.createElement("span");
+                    spanUpcoming.classList.add("upcoming");
+                    divForecastsInfo.appendChild(spanUpcoming);
+                    
+
+
+                  }
+                  )
+                  .catch((err) =>{
+                    forecastDiv.style.display = 'block'
+                    forecastDiv.innerHTML = 'Error'
+                });
+                  
             }
+            
+        }
+        
+        )
+        .catch((err) =>{
+            forecastDiv.style.display = 'block'
+            forecastDiv.innerHTML = 'Error'
         })
+    }
+
+
         
    
        
     
 
-}
 
+    
 attachEvents();
