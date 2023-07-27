@@ -24,11 +24,10 @@ function attachEvents() {
 
                 forecastDiv.style.display = 'block'
                 let divCurrent = document.getElementById('current')
-                const divUpcoming = document.getElementById('upcoming')
-                divUpcoming.style.display = 'block'
-                if(divCurrent.hasChildNodes()){
-                   divCurrent.innerHTML = ''
-                }
+                let divUpcoming = document.getElementById('upcoming')
+                
+                submitBtn.disabled = true
+                
                 data.forEach(element => {
                     if(element.name === enterLocation){
                         id = element.code
@@ -78,10 +77,31 @@ function attachEvents() {
                     let spanUpcoming = document.createElement("span");
                     spanUpcoming.classList.add("upcoming");
                     divForecastsInfo.appendChild(spanUpcoming);
+                    let lenght = upcomingForecast.forecast.length;
+                    for (let i = 0; i < lenght; i++) {
+                     
+                      let upcomingSymbol = document.createElement("span");
+                      upcomingSymbol.classList.add("symbol");
+                      spanUpcoming.appendChild(upcomingSymbol);
+                      upcomingSymbol.innerHTML = weaterSimbol[upcomingForecast.forecast[i].condition]
+
+                      let upcomingDegrees = document.createElement("span"); 
+                      upcomingDegrees.classList.add("forecast-data");
+                      upcomingDegrees.innerHTML = `${upcomingForecast.forecast[i].low}${weaterSimbol.Degrees}/${upcomingForecast.forecast[i].high}${weaterSimbol.Degrees}`;
+                      spanUpcoming.appendChild(upcomingDegrees);
+                    }
+                  }
+                      
+        
+                      
+                     
+                    
+                  
                     
 
-
-                  }
+                    
+                  
+                    
                   )
                   .catch((err) =>{
                     forecastDiv.style.display = 'block'
