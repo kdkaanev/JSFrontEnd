@@ -89,6 +89,12 @@ function attachEvents() {
                       upcomingDegrees.classList.add("forecast-data");
                       upcomingDegrees.innerHTML = `${upcomingForecast.forecast[i].low}${weaterSimbol.Degrees}/${upcomingForecast.forecast[i].high}${weaterSimbol.Degrees}`;
                       spanUpcoming.appendChild(upcomingDegrees);
+
+                      let upcomingCondition = document.createElement("span");
+                      upcomingCondition.classList.add("forecast-data");
+                      upcomingCondition.innerHTML = upcomingForecast.forecast[i].condition;
+                      spanUpcoming.appendChild(upcomingCondition);
+                      
                     }
                   }
                       
