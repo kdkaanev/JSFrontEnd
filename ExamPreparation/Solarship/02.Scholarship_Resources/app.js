@@ -3,21 +3,45 @@ window.addEventListener("load", solve);
 function solve() {
     
     const nextBtn = document.getElementById('next-btn')
-
-  
-
+    const student = document.getElementById('student')
+    const univers = document.getElementById('university')
+    const sc = document.getElementById('score')
     nextBtn.addEventListener('click', nextBtnHandler)
-
+    
     function nextBtnHandler(e){
-      const studentName = document.getElementById('student').value
-      const university = document.getElementById('university').value
-      const score = document.getElementById('score').value
-      const ulPrevieu = document.getElementById('preview-list')
-      
-      ulPrevieu.appendChild(addElement('li', ulPrevieu, null, ['application']))
+      let studentName = student.value
+      let university = univers.value
+      let score = sc.value
+      if(checkInformation(studentName, university,score)){
+        const ulPrevieu = document.getElementById('preview-list')
+        let liApplication = addElement('li', ulPrevieu, null, ['application'])
+        let article = addElement('article', liApplication)
+        let articleH4 = addElement('h4', article, studentName)
+        let articleUni = addElement('p', article, `University: ${university}`)
+        let articleScore = addElement('p', article, `Score: ${score}`)
+        let btnEdit = addElement('button', liApplication, 'edit', ['action-btn', 'edit'])
+        let btnApply = addElement('button', liApplication,'apply', ['action-btn', 'apply'])
+       
+        nextBtn.disabled = true
+        student.value = ''
+        univers.value = ''
+        sc.value = ''
+        
+      }
+
+    
+
     }
+    
 
-
+  function checkInformation(name, uni, score){
+    if(name !== '' && uni !== '' && score !== ''){
+      return true
+    }
+    else{
+      return false
+    }
+  }
   function addElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
     const htmlElement = document.createElement(type)
 
@@ -56,4 +80,5 @@ function solve() {
   }
   
   }
+  
   
