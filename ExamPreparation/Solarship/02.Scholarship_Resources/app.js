@@ -14,6 +14,7 @@ function solve() {
       let score = sc.value
       if(checkInformation(studentName, university,score)){
         const ulPrevieu = document.getElementById('preview-list')
+        const ulCandidates = document.getElementById('candidates-list')
         let liApplication = addElement('li', ulPrevieu, null, ['application'])
         let article = addElement('article', liApplication)
         let articleH4 = addElement('h4', article, studentName)
@@ -26,10 +27,30 @@ function solve() {
         student.value = ''
         univers.value = ''
         sc.value = ''
-        
-      }
+        btnEdit.addEventListener('click', editHandler)
+        btnApply.addEventListener('click', applyHandler)
 
-    
+        function editHandler(e){
+          student.value = articleH4.textContent;
+          univers.value = articleUni.textContent.split(": ")[1];
+          sc.value = articleScore.textContent.split(": ")[1];
+          btnEdit.remove();
+          btnApply.remove();
+          nextBtn.disabled = false;
+          liApplication.remove();
+        }
+        function applyHandler(e){
+          ulCandidates.appendChild(liApplication)
+
+          nextBtn.disabled = false;
+          btnEdit.remove();
+          btnApply.remove();
+          
+          
+        
+        }
+
+      }
 
     }
     
