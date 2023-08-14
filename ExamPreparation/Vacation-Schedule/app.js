@@ -108,8 +108,6 @@ function solve() {
               method: "DELETE",
             };
             fetch(BASIC_URL + vacationId, deleteHeaders);
-            const container = document.querySelector(`.container`);
-            container.remove();
             loadVacations();
 
           })
