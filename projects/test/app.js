@@ -11,6 +11,7 @@ function solve(){
         
         nameDoc.innerHTML = ''
         imgDiv.innerHTML = ''
+        cellNum.textContent = ''
         fetch(BASE_URL)
             .then((res) => res.json())
             .then(data=>{
@@ -24,6 +25,11 @@ function solve(){
         imgDiv.appendChild(img)
         let infoName = info[0]   
         console.log(infoName)
+        imgDiv.addEventListener('click', imgDivHandler)
+        function imgDivHandler(){
+            nameDoc.innerHTML = ''
+         
+         
         let {cell, name} = infoName
         cellNum.textContent = 'Tel.: ' + cell
         let {title, first, last} = name
@@ -31,6 +37,8 @@ function solve(){
         
         nameTable.textContent = `${title} ${first} ${last}`
         nameDoc.appendChild(nameTable)
+        }
+       
         
 
     }
